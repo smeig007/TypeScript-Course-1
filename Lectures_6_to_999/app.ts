@@ -89,7 +89,7 @@ console.log('It works..!');
                         let MyAddress = [11, 'The Big Long Road'];                  /* The order of the element types must match the declaration, "string" then "number" ! */
 /**/
 /**/
-/* ENUMS.............. 
+/* ENUMS.............. */
                         enum Color {
                             Red,
                             Blue,
@@ -99,7 +99,7 @@ console.log('It works..!');
                         let myColor : Color = Color.Blue;
                         console.log(myColor);
 
-                        In the console.log, the number 1 is displayed. Above is the default numbers assigned to 'elements'. However we can explicitly set a specific number to an 'element' :- 
+                       /* In the console.log, the number 1 is displayed. Above is the default numbers assigned to 'elements'. However we can explicitly set a specific number to an 'element' :- 
 
                         enum Color {
                             Red = 0,
@@ -113,7 +113,7 @@ console.log('It works..!');
                         Now in the console.log 100 appears.
 
                         HOWEVER if we declare with some default numbers and an explicit number :-
-*/
+
                         enum Color {
                             Red,
                             Blue = 100,
@@ -332,45 +332,152 @@ console.log('It works..!');
 /**/
 /* COMPLEX OBJECT example..............
 
-/***** The object called 'complex' has two properties, 'data' and 'output'.
+                        /***** The object called 'complex' has two properties, 'data' and 'output'.
 
-/***** data is declared as a number which is also an Array.
-/***** output is a declared as a FUNCTION which has one property called 'all' (name isn't that important the type IS !) with a type of boolean. This function returns a number array.
-*/
+                        /***** data is declared as a number which is also an Array.
+                        /***** output is a declared as a FUNCTION which has one property called 'all' (name isn't that important the type IS !) with a type of boolean. This function returns a number array.
+                        
+                        let complex: {data:number[], output:(all: boolean) => number[]} = {
+                            data: [100, 3.99, 10],
 
-let complex: {data:number[], output:(all: boolean) => number[]} = {
-    data: [100, 3.99, 10],
-
-    output: function(all: boolean): number[] {
-        return this.data;
-    }
-};
-/**/
-/**/
+                            output: function(all: boolean): number[] {
+                                return this.data;
+                            }
+                        };
+                        /**/
+                        /**/
 /* CREATING CUSTOM TYPES WITH TYPE ALIASES..........
 
-/* Squiggly brackets to the RIGHT of the = is the object, to the left is the type declaration - UNLESS we're declaring a custom type using an alias where the command starts with 'type'
+                        /* Squiggly brackets to the RIGHT of the = is the object, to the left is the type declaration - UNLESS we're declaring a custom type using an alias where the command starts with 'type'
 
-/* Same code as above, noe set up a new type with an alias of 'Complex' using the 'type' command
+                        /* Same code as above, now set up a new type with an alias of 'Complex' using the 'type' command
+
+                        type Complex = {data:number[], output:(all: boolean) => number[]} 
+
+                        let complex2: Complex = {
+                            data: [100, 3.99, 10],
+
+                            output: function(all: boolean): number[] {
+                                return this.data;
+                            }
+                        };
+/**/
+/**/
+/* ALLOWING MULTIPLE TYPES WITH UNION TYPES.......*/
+
+                        /* This is a way of allowing multiple types, say a STRING or (which is referred to as a single |) a NUMBER, 
+                        /* but not allowing say a BOOLEAN value - Otherwise you'd need to use a type of ANY.
+                        */
+                        let myRealRealAge: number | string = 27;
+                        myRealRealAge = "27";
+
+/**/
+/**/
+/* HOW TO CHECK TYPES AT RUN TIME.......
+
+                        let finalValue = "This is a string"                        ;
+                        if (typeof finalValue == "string") {
+                            console.log("Final value is a string....");
+                        }
+                                /*
+                                OR
+                                
+                        let finalValueNumber = 77;
+                        if (typeof finalValueNumber == 'number') {
+                            console.log("Final value is a number....");
+                        }
+
+
+/**/
+/**/
+/* THE NEVER TYPE.......
+
+                        Function (neverReturns) is NOT a void, as a void type doesn't return anything - this function never finishes, it never returns anything, it throws an error. It never returns.
+
+                        function neverReturns(): never {
+                            throw new Error("This is an error !");
+                        }
+/**/
+/**/
+/* NULLABLE TYPES..........
+
+                        let canBeNull = 12;     /* Variable is declared and set to 12, type is a NUMBER because a number has been assigned to it.
+                        canBeNull = null;       /* Can now set it to null if we wish. It will error when compiling...
+
+                        let canAlsoBeNull;      /* Variable declared, but is currently undefined and is type of ANY 
+                        canAlsoBeNull = null;   /* Can now set it to null if we wish. */
+
+                        /* If something is null you can NOT access that property. So sometimes not allowing null is a good idea */
+
+                        // "strictNullChecks": true,              /* Enable strict null checks. */
+
+                        /* This can be done (see line above) via a command in "tsconfig.json" file, the default is FALSE, you just need to set it to true then the above code will not work. 
+                        /* You're not allowed to declare a variable with a type of number/string etc. then assign null to it. :- 
+
+                        PS C:\grh\Courses\TypeScript-Course-1\Lectures_6_to_999> tsc
+                        app.ts:405:1 - error TS2322: Type 'null' is not assignable to type 'number'.
+
+                        405 canBeNull = null;       /* Can now set it to null if we wish. 
+                            ~~~~~~~~~
+                        Found 1 error.
+
+
+                        NOTE - canAlsoBeNull doesn't give an error, this is because canAlsoBeNull is currently undefined - we've not assigned a value to it, just declared it. 
+
+
+                        We can also get around this, by leaving the strictNullChecks left on (true) which will check all variables can not be null, 
+                        then use a UNION TYPE to create and exception on this variable should we wish to....
 */
+                        let canBeNull: number | null = 12;  /* Variable is declared and set to 12, type is explicitly set to a NUMBER or NULL. */
+                        canBeNull = null;                   /* Can now set it to null if we wish. It will compile ok now. 
 
-type Complex = {data:number[], output:(all: boolean) => number[]} 
+/**/
+/**/
+/* EXERCISE TIME........
 
-let complex2: Complex = {
-    data: [100, 3.99, 10],
-
-    output: function(all: boolean): number[] {
-        return this.data;
+Existing Code...
+*/
+let bankAccount = {
+    money: 2000,
+    deposit(value: number) {
+        this.money += value;
     }
 };
 /**/
+let myself = {
+    name: "Greig",
+    bankAccount: bankAccount,
+    hobbies : ['sports', 'cooking']
+};
+/**/
+myself.bankAccount.deposit(3000);
+/**/
+console.log(myself);
 /**/
 /**/
 /**/
+/*
+My new Code...
+*/
+type myBankAccNo = {money: number, deposit:(value: number) => void};
 /**/
+let bankAccount: myBankAccNo = {
+    money: 2000,
+    deposit(value: number) {
+        this.money += value;
+    }
+};
 /**/
+let myself: {name: string, bankAccount: myBankAccNo, hobbies: string[]} = {
+    name: "Greig",
+    bankAccount: bankAccount,
+    hobbies : ['sports', 'cooking']
+};
 /**/
+myself.bankAccount.deposit(3000);
 /**/
+console.log(myself);
+
 /**/
 /**/
 /**/
