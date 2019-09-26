@@ -386,8 +386,6 @@ console.log('It works..!');
                         if (typeof finalValueNumber == 'number') {
                             console.log("Final value is a number....");
                         }
-
-
 /**/
 /**/
 /* THE NEVER TYPE.......
@@ -409,7 +407,7 @@ console.log('It works..!');
 
                         /* If something is null you can NOT access that property. So sometimes not allowing null is a good idea */
 
-                        // "strictNullChecks": true,              /* Enable strict null checks. */
+        // "strictNullChecks": true,              /* Enable strict null checks. */
 
                         /* This can be done (see line above) via a command in "tsconfig.json" file, the default is FALSE, you just need to set it to true then the above code will not work. 
                         /* You're not allowed to declare a variable with a type of number/string etc. then assign null to it. :- 
