@@ -434,52 +434,48 @@ console.log('It works..!');
 /**/
 /**/
 /* EXERCISE TIME........
-
-Existing Code...
-*/
-let bankAccount = {
-    money: 2000,
-    deposit(value: number) {
-        this.money += value;
-    }
-};
-/**/
-let myself = {
-    name: "Greig",
-    bankAccount: bankAccount,
-    hobbies : ['sports', 'cooking']
-};
-/**/
-myself.bankAccount.deposit(3000);
-/**/
-console.log(myself);
-/**/
-/**/
-/**/
 /*
-My new Code...
-*/
-type myBankAccNo = {money: number, deposit:(value: number) => void};
-/**/
-let bankAccount: myBankAccNo = {
-    money: 2000,
-    deposit(value: number) {
-        this.money += value;
-    }
-};
-/**/
-let myself: {name: string, bankAccount: myBankAccNo, hobbies: string[]} = {
-    name: "Greig",
-    bankAccount: bankAccount,
-    hobbies : ['sports', 'cooking']
-};
-/**/
-myself.bankAccount.deposit(3000);
-/**/
-console.log(myself);
+/* Existing Code...
+                        let bankAccount = {
+                            money: 2000,
+                            deposit(value: number) {
+                                this.money += value;
+                            }
+                        };
 
-/**/
-/**/
+                        let myself = {
+                            name: "Greig",
+                            bankAccount: bankAccount,
+                            hobbies : ['sports', 'cooking']
+                        };
+
+                        myself.bankAccount.deposit(3000);
+                        /
+                        console.log(myself);
+                        /**/
+                        /**/
+                        /**/
+                        /*
+                        My new Code...
+
+                        type myBankAccNo = {money: number, deposit:(value: number) => void};
+                        /*
+                        let bankAccount: myBankAccNo = {
+                            money: 2000,
+                            deposit(value: number) {
+                                this.money += value;
+                            }
+                        };
+
+                        let myself: {name: string, bankAccount: myBankAccNo, hobbies: string[]} = {
+                            name: "Greig",
+                            bankAccount: bankAccount,
+                            hobbies : ['sports', 'cooking']
+                        };
+                        /*
+                        myself.bankAccount.deposit(3000);
+                        /*
+                        console.log(myself);
 /**/
 /**/
 /**/
