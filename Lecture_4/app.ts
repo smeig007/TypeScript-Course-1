@@ -2,11 +2,13 @@
 /*  To get his working we need a lite-server running so :- 
 
     1. run "npm init"
+    2. run "npm install --save-dev lite-server"
     2. run "npm install"
-    3. nmp start (the name of the script in "package.json")
-    4. tsc (in a NEW terminal window.
-    5. F12 in the browser to see the console messages
-
+    3. run "tsc --init"
+    4. nmp start (the name of the script in "package.json")
+    5. tsc (in a NEW terminal window)
+    6. F12 in the browser to see the console messages
+*/
 //
 /* LET and CONST */
 //
@@ -128,7 +130,7 @@ countdown(20);              // 20 is used in this call....
 const numbers = [1, 44, 65, -7];
 console.log(Math.max(4, 6, 99, -6));
 //
-// Can not run the Math.max method on an array, it doens't work as it expects a list of numbers as per above. To use it on an array we use the SPREAD operator which is 3 dots ... 
+// Can not run the Math.max method on an array, it doesn't work as it expects a list of numbers as per above. To use it on an array we use the SPREAD operator which is 3 dots ... 
 //
 console.log(Math.max(...numbers));
 //
