@@ -65,9 +65,13 @@ greet(person);
 //
 //
 // INTERFACES and PROPERTIES
-//
+/*
 interface NamedPerson {
     firstName: string;    
+    // Without the following line, the call on line 87 (greet({firstName: 'Shauna', age: 27});)  will fail. We need to include 'age', and also '?' which means 'age' is optional ! 
+    age? : number;
+    // If you dont know the 'name' of the properties, you can use [] - NO THEY'RE NOT AN ARRAY !! They're a 'FLEXIBLE KEY NAME' they can be called anything, I'm calling my 'propName'
+    [propName : string] : any;
 }
 //
 function greet (person: NamedPerson) {
@@ -80,7 +84,9 @@ function changeName(person: NamedPerson) {
 //
 const person = {
     firstName: 'Greig',
-    age : 47
+    age : 47,
+    // This refers to the 'FLEXIBLE KEY NAME' in the interface (NamedPerson), where we didn't know the name of the property. 
+    hobbies: ['Sports', 'cooking']
 }
 // Changing the below line causes the following compilation error....
 greet({firstName: 'Shauna', age: 27});
@@ -93,9 +99,54 @@ greet({firstName: 'Shauna', age: 27});
                         
             Found 1 error.
 */
-//
+/*
 changeName(person);
 greet(person);
+*/
+//
+//
+//
+//
+//
+//
+//
+// INTERFACES and METHODS
+//
+interface NamedPerson {
+    firstName: string;    
+    // Without the following line, the call on line 143 (greet({firstName: 'Shauna', age: 27});)  will fail. We need to include 'age', and also '?' which means 'age' is optional ! 
+    age? : number;
+    // If you dont know the 'name' of the properties, you can use [] - NO THEY'RE NOT AN ARRAY !! They're a 'FLEXIBLE KEY NAME' they can be called anything, I'm calling my 'propName'
+    [propName : string] : any;
+    // We can also have a method in our interface....
+    greet(lastName: string) : void;
+}
+//
+function greet (person: NamedPerson) {
+    console.log("hello, " + person.firstName);
+}
+//
+function changeName(person: NamedPerson) {
+    person.firstName = 'Bob';
+}
+//
+const person: NamedPerson = {
+    firstName: 'Greig',
+    age : 47,
+    // This refers to the 'FLEXIBLE KEY NAME' in the interface (NamedPerson), where we didn't know the name of the property. 
+    hobbies: ['Sports', 'cooking'],
+    greet(lastName : string) {
+        console.log('Hi, i am ' + this.firstName + ' ' + lastName + '.....');
+    }
+};
+//
+//greet({firstName: 'Shauna', age: 27});
+//
+changeName(person);
+//
+greet(person);
+//
+person.greet('Whatever');
 //
 //
 //
@@ -104,14 +155,7 @@ greet(person);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+// USING INTERFACES WITH CLASSES....
 //
 //
 //

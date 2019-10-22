@@ -10,29 +10,21 @@ function changeName(person) {
 //
 var person = {
     firstName: 'Greig',
-    age: 47
+    age: 47,
+    // This refers to the 'FLEXIBLE KEY NAME' in the interface (NamedPerson), where we didn't know the name of the property. 
+    hobbies: ['Sports', 'cooking'],
+    greet: function (lastName) {
+        console.log('Hi, i am ' + this.firstName + ' ' + lastName + '.....');
+    }
 };
-// Changing the below line causes the following compilation error....
-greet({ firstName: 'Shauna', age: 27 });
-/*
-            PS C:\grh\Courses\TypeScript-Course-1\Lecture_7_Interfaces> tsc
-            app.ts:86:29 - error TS2345: Argument of type '{ firstName: string; age: number; }' is not assignable to parameter of type 'NamedPerson'.
-            Object literal may only specify known properties, and 'age' does not exist in type 'NamedPerson'.
-
-            86 greet({firstName: 'Shauna', age: 27});
-                        
-            Found 1 error.
-*/
+//
+//greet({firstName: 'Shauna', age: 27});
 //
 changeName(person);
+//
 greet(person);
 //
-//
-//
-//
-//
-//
-//
+person.greet('Whatever');
 //
 //
 //
