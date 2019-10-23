@@ -1,30 +1,50 @@
 "use strict";
 //
-function greet(person) {
-    console.log("hello, " + person.firstName);
-}
-//
-function changeName(person) {
-    person.firstName = 'Bob';
-}
-//
-var person = {
-    firstName: 'Greig',
-    age: 47,
-    // This refers to the 'FLEXIBLE KEY NAME' in the interface (NamedPerson), where we didn't know the name of the property. 
-    hobbies: ['Sports', 'cooking'],
+var oldPerson = {
+    age: 44,
+    firstName: 'Fred',
     greet: function (lastName) {
-        console.log('Hi, i am ' + this.firstName + ' ' + lastName + '.....');
+        console.log('Allwighhhhtttttt!! ' + this.firstName + ' ' + lastName + ', my age is ' + this.age + '.');
     }
 };
 //
-//greet({firstName: 'Shauna', age: 27});
+console.log(oldPerson);
 //
-changeName(person);
+oldPerson.greet('Bloggs');
 //
-greet(person);
 //
-person.greet('Whatever');
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
