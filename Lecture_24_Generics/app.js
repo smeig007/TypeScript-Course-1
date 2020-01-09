@@ -219,6 +219,8 @@ console.log(simpleMath4.calculate());
 //
 // Module Exercise.....
 //
+// ES6 introduced 'MAP' - this is to store KEY VALUE pairs 
+//
 var MyMap = /** @class */ (function () {
     function MyMap() {
         // Declare a 'private' property map , which is of type object ({})....it is NOT an array, despite the square brackets, it is defining a key, which is of type string
