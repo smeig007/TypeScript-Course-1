@@ -25,14 +25,14 @@
 //
 //
 //
-const button = document.querySelector("button");
-const input1 = document.getElementById("num1");
-const input2 = document.getElementById("num2");
+const button_a = document.querySelector("button");
+const input1_b = document.getElementById("num1");
+const input2_c = document.getElementById("num2");
 //
 //
 // IMPORTANT - when you access a value in typescript it is ALWAYS ALWAYS ALWAYS a string !!!!!
 //
-function add(num1, num2) {
+function add_d(num1, num2) {
   // Here we are adding two strings together. In javascript adding two strings together actually concatenates them ! 
   //  so '2' + '2' = '22' and not 4 - this is concatenating two strings not adding them.
   return num1 + num2;
@@ -41,7 +41,7 @@ function add(num1, num2) {
 // IMPORTANT - when you access a value in typescript it is ALWAYS ALWAYS ALWAYS a string !!!!!
 //
 button.addEventListener("click", function() {
-  console.log(add(input1.value, input2.value));
+  console.log(add(input1_b.value, input2_c.value));
 });
 //
 //
