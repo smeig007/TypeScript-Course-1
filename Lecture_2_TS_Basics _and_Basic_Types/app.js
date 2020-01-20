@@ -1,123 +1,100 @@
 "use strict";
 //
-// OBJECT TYPES....
-//
-/* one way to define "person"
-const person = {
-    name: 'Bob',
-    age: 44;
-};
-*/
-/*
-// Another way...this time showing, not inferring, the 'person' is of type OBJECT, also explicitly giving TYPES name and age. It is NOT ideal, best let Typescript handle it.
-//
-// const person: {
-//      name: string;
-//      age: number;
-//  } = {
-//      name: 'Bob',
-//      age: 44
-//  };
-//
-const person = {
-  name: 'Bob',
-  age: 44
-};
-//
-console.log(person);
+/*  To get his working we need a lite-server running so :-
+
+    1. run "npm init"
+    2. run "npm install --save-dev lite-server"
+    3. in package.json add the following after "test", which is in "scripts"    -->    "start": "lite-server"
+    4. run "npm install"
+    5. run "tsc --init"
+    6. nmp start (the name of the script in "package.json")
+    7. tsc (in a NEW terminal window)
+    8. F12 in the browser to see the console messages
 */
 //
 //
 //
 //
-// ARRAYS TYPES.............
+// FUNCTION RETURN TYPES and VOID.....
 /*
-const person = {
-  name: 'Bob',
-  age: 44,
-  hobbies: ['Sports', 'Cooking', 'Reading']
-};
-//
-let favouriteActivities: string[];
-favouriteActivities = ['walking']
-//
-console.log(person);
-console.log(favouriteActivities);
-//
-for (const hobby of person.hobbies) {
-    console.log(hobby.toUpperCase());
+// As 2 numbers are input into 'add' then added together, Typescript infers the return type as a number.
+function add(n1: number, n2: number) {
+    return n1 + n2;
 }
-*/
 //
-//
-//
-//
-//
-// WORKING WITH TUPLES..............
-/*
-const person: {
-    name: string;
-    age: number;
-    hobbies: string[];
-    role: [number, string]; //Tuple, will only ever be 2 elements, 1st elements is a number, 2nd element is a string
-} = {
-  name: 'Bob',
-  age: 44,
-  hobbies: ['Sports', 'Cooking', 'Reading'],
-  role: [2, 'Author'] //Tuple, will only ever be 2 elements, it accepts both strings and numbers
-};
-//
-//person.role.push('Admin');
-//person.role[1] = 10;
-//
-person.role = [0, 'admin', 'user']  // Typescript error...when uncommented. Will still compile
-//
-console.log(person);
-*/
-//
-//
-//
-//
-//
-// WORKING WITH ENUMS..............
-//
-// ENUMS usually start with a capital letter...
-//
-//  enum Roles { ADMIN, READ_ONLY, AUTHOR }; // behind the scenes they're all assigned a number, starting at 0 - this is the DEFAULT !!
-//                  0,       1,       2      // behind the scenes they're all assigned a number, starting at 0, like an array does.   
-//
-// I do not HAVE to start at 0, i can start at any number...the following are then increment automatically.
-//  enum Roles { ADMIN = 7, READ_ONLY, AUTHOR };  // behind the scenes they're all assigned a number
-//                  7,         8,        9        // behind the scenes they're all assigned a number
-/*
-// I can also set them manually...
-enum Roles { ADMIN = 7, READ_ONLY = 22, AUTHOR = 144 };  // Number is manually assigned.
-//              7,          22,            144           // Number is manually assigned.
-//
-const person = {
-  name: 'Bob',
-  age: 44,
-  hobbies: ['Sports', 'Cooking', 'Reading'],
-  role: Roles.ADMIN
-};
-//
-if (person.role === Roles.ADMIN) {
-    console.log('Is Admin');
+// We're not returning anything here, just outputting a console message, so the return type is 'VOID'. Typescript has inferred this return type.
+function printResults(num: number) {
+    console.log('Result is : ' + num);
 }
+//
+printResults(add(5, 5));
+//
+//
+// The function printResults doesn't return a value running the following code wil give me a value of UNDEFINED. As there's nothing returned, there's nothing to go to the console.
+console.log(printResults(add(5, 5)));
 */
 //
 //
 //
 //
 //
+// FUNCTIONS AS TYPES.......
 //
-// THE 'ANY' TYPE.....................
+// As 2 numbers are input into 'add' then added together, Typescript infers the return type as a number.
+function add(n1, n2) {
+    return n1 + n2;
+}
+//
+// We're not returning anything here, just outputting a console message, so the return type is 'VOID'. Typescript has inferred this return type. 
+function printResults(num) {
+    console.log('Result is : ' + num);
+}
+//
+printResults(add(5, 5));
+//
+//      The function printResults doesn't return a value running the following code wil give me a value of UNDEFINED. As there's nothing returned, there's nothing to go to the console.
+//          console.log(printResults(add(5, 5)));
+//
+//
+//  let combineValues;  // has a type of 'any' - due to this, line 64 (combineValues = 5;) compiles but will not run. So I need to set a type of 'function', line 64 now fails compilation.
+// This also has an issue, i can now point it at any function, like printResults - however this doesn't accept 2 parameters, it'll compile, running it I'd get 'undefined'
+var combineValues;
+//
+// combineValues is now a POINTER to the function 'add'
+combineValues = add;
+//
+combineValues = printResults; // compiles, but get an 'undefined' when running.
+//
+// As conbineValues is of type 'any' the following line will compile, but will fall over at run time, saying combineValues is not a function...commented out now combineValues is of type 'function'
+//combineValues = 5;
+//
+// Call the function combineValues (well add really) and output the result....
+console.log(combineValues(2, 7));
+//
+//
+//
+//
+// Let's create a function type as the above is too messy and prone to failures.....
+//
+//
+//This says; 'combineValuesNew' accepts any function that takes two number parameters and returns a number...
+var combineValuesNew;
+//
+combineValuesNew = add; // works as the function 'add' accepts two number parameters and returns a number.
+//
+//combineValuesNew = printResults;    // doesn't work as printResults doesn't accept two number parameters and doesn't return a number
+//
+console.log(combineValuesNew(10, 107));
 //
 //
 //
 //
 //
 //
+//
+//
+//
+// FUNCTION TYPES and CALLBACKS.....
 //
 //
 //
