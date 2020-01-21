@@ -14,119 +14,33 @@
 //
 //
 //
-// FUNCTION RETURN TYPES and VOID.....
-/*
-// As 2 numbers are input into 'add' then added together, Typescript infers the return type as a number.
-function add(n1: number, n2: number) {
-    return n1 + n2;
+// The UNKNOWN Type.....
+//
+let userInput: unknown;
+let userName: string;
+//
+userInput = 7;
+userInput = 'Bob';
+//
+//          userName = userInput; //Wont work, userInput is a 'string' I cant put a string into an unknown variable. 
+//
+// I need to 'check' the type first, before I can assign it....
+if (typeof userInput === 'string') {
+  userName = userInput; 
 }
 //
-// We're not returning anything here, just outputting a console message, so the return type is 'VOID'. Typescript has inferred this return type. 
-function printResults(num: number) {
-    console.log('Result is : ' + num);
+//console.log(userName);
+//
+//
+//
+//
+//
+// The NEVER Type.......
+//
+// 2 input parms, one a string the other a number, then store them in the object {}, by default the return type is VOID. But We change it to NEVER as it'll NEVER return anything.
+function generateError(message: string, code: number): never {
+    throw { message: message, errorCode: code };
 }
 //
-printResults(add(5, 5));
-//
-//
-// The function printResults doesn't return a value running the following code wil give me a value of UNDEFINED. As there's nothing returned, there's nothing to go to the console.
-console.log(printResults(add(5, 5)));
-*/
-//
-//
-//
-//
-//
-// FUNCTIONS AS TYPES.......
-//
-// As 2 numbers are input into 'add' then added together, Typescript infers the return type as a number.
-function add(n1: number, n2: number) {
-    return n1 + n2;
-}
-//
-// We're not returning anything here, just outputting a console message, so the return type is 'VOID'. Typescript has inferred this return type. 
-function printResults(num: number) {
-    console.log('Result is : ' + num);
-}
-//
-printResults(add(5, 5));
-//
-//      The function printResults doesn't return a value running the following code wil give me a value of UNDEFINED. As there's nothing returned, there's nothing to go to the console.
-//          console.log(printResults(add(5, 5)));
-//
-//
-//  let combineValues;  // has a type of 'any' - due to this, line 64 (combineValues = 5;) compiles but will not run. So I need to set a type of 'function', line 64 now fails compilation.
-// This also has an issue, i can now point it at any function, like printResults - however this doesn't accept 2 parameters, it'll compile, running it I'd get 'undefined'
-let combineValues: Function;
-//
-// combineValues is now a POINTER to the function 'add'
-combineValues = add;
-//
-combineValues = printResults;       // compiles, but get an 'undefined' when running.
-//
-// As conbineValues is of type 'any' the following line will compile, but will fall over at run time, saying combineValues is not a function...commented out now combineValues is of type 'function'
-//combineValues = 5;
-//
-// Call the function combineValues (well add really) and output the result....
-console.log(combineValues(2, 7));
-//
-//
-//
-//
-// Let's create a function type as the above is too messy and prone to failures.....
-//
-//
-//This says; 'combineValuesNew' accepts any function that takes two number parameters and returns a number...
-let combineValuesNew: (a: number, b: number) => number;
-//
-combineValuesNew = add;             // works as the function 'add' accepts two number parameters and returns a number.
-//
-//combineValuesNew = printResults;    // doesn't work as printResults doesn't accept two number parameters and doesn't return a number
-//
-console.log(combineValuesNew(10, 107));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// FUNCTION TYPES and CALLBACKS.....
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+generateError('An error occurred, code :', 7000);
 //
